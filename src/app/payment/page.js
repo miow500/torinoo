@@ -1,15 +1,8 @@
-"use client";
-
-import useQuery from "@/core/hooks/query";
 import Link from "next/link";
-import { useEffect } from "react";
 
-function PaymentPage() {
-  const { getQuery } = useQuery();
+function PaymentPage({ searchParams }) {
 
-  const status = getQuery("status");
-
-  if (status === "success")
+  if (searchParams?.status === "success")
     return (
       <div>
         <p>پرداخت شما با موفقیت انجام شد</p>
