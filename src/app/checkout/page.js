@@ -7,6 +7,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import api from "@/lib/axios";
 import { toast } from "react-toastify";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 const passengerSchema = yup.object({
   fullName: yup.string().required("نام و نام خانوادگی الزامی است"),
@@ -98,7 +100,16 @@ export default function CheckoutPage() {
               </button>
             </>
           ) : (
-            <p className="text-sm text-zinc-500">در حال بارگذاری تور...</p>
+            <>
+              <Skeleton height={24} width="60%" />
+              <div className="mt-2">
+                <Skeleton height={14} width="40%" />
+              </div>
+              <div className="mb-6 mt-4 border-t border-zinc-100 pt-4">
+                <Skeleton height={28} width="80%" />
+              </div>
+              <Skeleton height={48} borderRadius={8} />
+            </>
           )}
         </div>
 

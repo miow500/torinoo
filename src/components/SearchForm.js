@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { DatePicker } from "zaman";
+import { MapPin, Globe, CalendarDays } from "lucide-react";
 
 export default function SearchForm({ origins = [], destinations = [] }) {
   const router = useRouter();
@@ -20,13 +21,13 @@ export default function SearchForm({ origins = [], destinations = [] }) {
 
   return (
     <div 
-      className="mx-auto w-full max-w-4xl rounded-full border border-zinc-200 bg-white p-2 shadow-sm flex items-center justify-between" 
-      dir="rtl"
-    >
+  className="mx-auto w-full max-w-4xl rounded-2xl border border-zinc-200 bg-white p-2 shadow-sm flex items-center justify-between" 
+  dir="rtl"
+>
       
       {/* فیلد مبدا */}
       <div className="flex w-full items-center justify-start gap-2 px-5 py-2 md:w-1/4">
-        <span className="text-zinc-600 text-lg">📍</span>
+        <MapPin size={18} className="text-zinc-500 flex-shrink-0" />
         <select
           value={originId}
           onChange={(e) => setOriginId(e.target.value)}
@@ -41,12 +42,11 @@ export default function SearchForm({ origins = [], destinations = [] }) {
         </select>
       </div>
 
-      {/* خط جداکننده عمودی اول */}
       <div className="hidden md:block h-8 w-[1px] bg-zinc-200"></div>
 
       {/* فیلد مقصد */}
       <div className="flex w-full items-center justify-start gap-2 px-5 py-2 md:w-1/4">
-        <span className="text-zinc-600 text-lg">🌍</span>
+        <Globe size={18} className="text-zinc-500 flex-shrink-0" />
         <select
           value={destinationId}
           onChange={(e) => setDestinationId(e.target.value)}
@@ -61,12 +61,11 @@ export default function SearchForm({ origins = [], destinations = [] }) {
         </select>
       </div>
 
-      {/* خط جداکننده عمودی دوم */}
       <div className="hidden md:block h-8 w-[1px] bg-zinc-200"></div>
 
       {/* فیلد تاریخ */}
       <div className="flex w-full items-center justify-start gap-2 px-5 py-2 md:w-1/4">
-        <span className="text-zinc-600 text-lg">📅</span>
+        <CalendarDays size={18} className="text-zinc-500 flex-shrink-0" />
         <div className="w-full text-right">
           <DatePicker
             onChange={(value) => setDate(value.value)}
@@ -78,11 +77,11 @@ export default function SearchForm({ origins = [], destinations = [] }) {
         </div>
       </div>
 
-      {/* دکمه جستجو کاملاً کپسولی و کشیده مطابق تصویر */}
+      {/* دکمه جستجو */}
       <div className="p-1 md:w-1/4 flex justify-end">
         <button
           onClick={handleSearch}
-          className="w-full max-w-[180px] rounded-full bg-[#28a745] py-3 px-8 text-center text-base font-bold text-white shadow-sm transition-all hover:bg-[#218838]"
+          className="w-full max-w-[180px] rounded-xl bg-[#28a745] py-3 px-8 text-center text-base font-bold text-white shadow-sm transition-all hover:bg-[#218838]"
         >
           جستجو
         </button>

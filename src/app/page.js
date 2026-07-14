@@ -70,9 +70,9 @@ export default async function Home({ searchParams }) {
 
       {/* ۲. نوشته‌ی هدر */}
       <div className="text-center mt-6 mb-4">
-        <h1 className="text-xl font-bold text-zinc-800 sm:text-2xl">
-          <span className="text-green-600">تورینو</span> برگزار کننده بهترین تورهای داخلی و خارجی
-        </h1>
+        <h1 className="text-xl font-normal tracking-wide text-zinc-800 sm:text-2xl">
+  <span className="text-green-600 font-normal">تورینو</span> برگزار کننده بهترین تورهای داخلی و خارجی
+</h1>
       </div>
 
       {/* ۳. فرم جستجو */}
