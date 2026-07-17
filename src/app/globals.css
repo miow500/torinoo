@@ -25,3 +25,8 @@ body {
     text-wrap: balance;
   }
 }
+.zm-datepicker,
+.zm-calendar-container {
+  transform: scale(0.85);
+  transform-origin: top right;
+}

@@ -3,7 +3,6 @@
 import { useState } from "react";
 import Link from "next/link";
 
-// دیتای تورها همراه با آیکون‌های اورجینال ارسالی شما
 const initialMyTours = [
   {
     id: "1",

@@ -9,6 +9,7 @@ import api from "@/lib/axios";
 import { toast } from "react-toastify";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+import { User } from "lucide-react";
 
 const passengerSchema = yup.object({
   fullName: yup.string().required("نام و نام خانوادگی الزامی است"),
@@ -63,17 +64,17 @@ export default function CheckoutPage() {
 
   return (
     <div className="mx-auto max-w-4xl px-4 py-10" dir="rtl">
-      <h1 className="mb-6 text-lg font-bold text-zinc-800 sm:text-xl">
+      <h1 className="mb-6 text-lg font-normal text-zinc-800 sm:text-xl">
         ثبت و خرید نهایی
       </h1>
 
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
         
-        {/* کارت خلاصه تور - سمت راست */}
-        <div className="order-1 rounded-2xl border border-zinc-200 bg-white p-6 shadow-sm">
+        {/* کارت خلاصه تور - سمت چپ */}
+        <div className="order-2 rounded-2xl border border-zinc-200 bg-white p-6 shadow-sm">
           {tour ? (
             <>
-              <h2 className="mb-1 text-lg font-black text-zinc-800">
+              <h2 className="mb-1 text-lg font-normal text-zinc-800">
                 {tour.title}
               </h2>
               {duration && (
@@ -82,9 +83,9 @@ export default function CheckoutPage() {
 
               <div className="mb-6 flex items-center justify-between border-t border-zinc-100 pt-4">
                 <span className="text-sm text-zinc-400">قیمت نهایی</span>
-                <span className="text-xl font-black text-green-600">
+                <span className="text-xl font-normal text-blue-500">
                   {tour.price?.toLocaleString()}{" "}
-                  <span className="text-xs font-medium text-zinc-500">
+                  <span className="text-xs font-normal text-zinc-500">
                     تومان
                   </span>
                 </span>
@@ -94,7 +95,7 @@ export default function CheckoutPage() {
                 type="button"
                 onClick={handleSubmit(onSubmit)}
                 disabled={isSubmitting}
-                className="w-full rounded-lg bg-green-600 py-3 text-sm font-bold text-white transition-colors hover:bg-green-700 disabled:opacity-50"
+                className="w-full rounded-lg bg-green-600 py-3 text-sm font-normal text-white transition-colors hover:bg-green-700 disabled:opacity-50"
               >
                 {isSubmitting ? "در حال ثبت..." : "ثبت و خرید نهایی"}
               </button>
@@ -113,42 +114,62 @@ export default function CheckoutPage() {
           )}
         </div>
 
-        {/* فرم مشخصات مسافر - سمت چپ */}
-        <div className="order-2 rounded-2xl border border-zinc-200 bg-white p-6 shadow-sm">
-          <h2 className="mb-4 font-bold text-zinc-800">مشخصات مسافر</h2>
+        {/* فرم مشخصات مسافر - سمت راست */}
+        <div className="order-1 rounded-2xl border border-zinc-200 bg-white p-6 shadow-sm">
+          <h2 className="mb-4 flex items-center gap-2 font-normal text-zinc-800">
+            <User size={18} className="text-zinc-500" />
+            <span>مشخصات مسافر</span>
+          </h2>
 
           <form
             onSubmit={handleSubmit(onSubmit)}
             className="flex flex-col gap-4"
           >
-            <div>
-              <input
-                type="text"
-                placeholder="نام و نام خانوادگی"
-                {...register("fullName")}
-                className="w-full rounded-lg border border-zinc-300 px-4 py-2 text-right text-zinc-900 outline-none focus:border-green-500"
-              />
-              {errors.fullName && (
-                <p className="mt-1 text-sm text-red-500">
-                  {errors.fullName.message}
-                </p>
-              )}
+            {/* ردیف اول: نام / کد ملی / تاریخ تولد */}
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+              <div>
+                <input
+                  type="text"
+                  placeholder="نام و نام خانوادگی"
+                  {...register("fullName")}
+                  className="w-full rounded-lg border border-zinc-300 px-4 py-2 text-right text-zinc-900 outline-none focus:border-green-500"
+                />
+                {errors.fullName && (
+                  <p className="mt-1 text-sm text-red-500">
+                    {errors.fullName.message}
+                  </p>
+                )}
+              </div>
+
+              <div>
+                <input
+                  type="text"
+                  placeholder="کد ملی"
+                  {...register("nationalCode")}
+                  className="w-full rounded-lg border border-zinc-300 px-4 py-2 text-right text-zinc-900 outline-none focus:border-green-500"
+                />
+                {errors.nationalCode && (
+                  <p className="mt-1 text-sm text-red-500">
+                    {errors.nationalCode.message}
+                  </p>
+                )}
+              </div>
+
+              <div>
+                <input
+                  type="date"
+                  {...register("birthDate")}
+                  className="w-full rounded-lg border border-zinc-300 px-4 py-2 text-right text-zinc-900 outline-none focus:border-green-500"
+                />
+                {errors.birthDate && (
+                  <p className="mt-1 text-sm text-red-500">
+                    {errors.birthDate.message}
+                  </p>
+                )}
+              </div>
             </div>
 
-            <div>
-              <input
-                type="text"
-                placeholder="کد ملی"
-                {...register("nationalCode")}
-                className="w-full rounded-lg border border-zinc-300 px-4 py-2 text-right text-zinc-900 outline-none focus:border-green-500"
-              />
-              {errors.nationalCode && (
-                <p className="mt-1 text-sm text-red-500">
-                  {errors.nationalCode.message}
-                </p>
-              )}
-            </div>
-
+            {/* ردیف دوم: جنسیت (تمام عرض) */}
             <div>
               <select
                 {...register("gender")}
@@ -161,20 +182,6 @@ export default function CheckoutPage() {
               {errors.gender && (
                 <p className="mt-1 text-sm text-red-500">
                   {errors.gender.message}
-                </p>
-              )}
-            </div>
-
-            <div>
-              <input
-                type="date"
-                placeholder="تاریخ تولد"
-                {...register("birthDate")}
-                className="w-full rounded-lg border border-zinc-300 px-4 py-2 text-right text-zinc-900 outline-none focus:border-green-500"
-              />
-              {errors.birthDate && (
-                <p className="mt-1 text-sm text-red-500">
-                  {errors.birthDate.message}
                 </p>
               )}
             </div>

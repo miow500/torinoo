@@ -1,5 +1,5 @@
 "use client";
-
+import { translateCity } from "@/lib/cityMap";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
@@ -23,10 +23,10 @@ export default function SearchForm({ origins, destinations }) {
       >
         <option value="">مبدا</option>
         {origins.map((origin) => (
-          <option key={origin.id} value={origin.id}>
-            {origin.name}
-          </option>
-        ))}
+  <option key={origin.id} value={origin.id}>
+    {translateCity(origin.name)}
+  </option>
+))}
       </select>
 
       <select
@@ -36,10 +36,10 @@ export default function SearchForm({ origins, destinations }) {
       >
         <option value="">مقصد</option>
         {destinations.map((destination) => (
-          <option key={destination.id} value={destination.id}>
-            {destination.name}
-          </option>
-        ))}
+  <option key={destination.id} value={destination.id}>
+    {translateCity(destination.name)}
+  </option>
+))}
       </select>
 
       <input

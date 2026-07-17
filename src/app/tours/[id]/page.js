@@ -7,6 +7,7 @@ import {
   CalendarDays,
 } from "lucide-react";
 import Image from "next/image";
+import { translateCity } from "@/lib/cityMap";
 
 async function getTour(id) {
   const response = await api.get(`/tour/${id}`);
@@ -42,23 +43,6 @@ const vehicleMap = {
   airplane: "هواپیما",
   SUV: "شاسی‌بلند",
 };
-
-const cityMap = {
-  Tehran: "تهران",
-  Sananndaj: "سنندج",
-  Madrid: "مادرید",
-  Isfahan: "اصفهان",
-  Sulaymaniyah: "سلیمانیه",
-  Hewler: "هولیر",
-  Mazandaran: "مازندران",
-  Gilan: "گیلان",
-  Italy: "ایتالیا",
-};
-
-function translateCity(name) {
-  if (!name) return "-";
-  return cityMap[name] || name;
-}
 
 export default async function TourDetailPage({ params }) {
   const tour = await getTour(params.id);
