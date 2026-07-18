@@ -30,3 +30,26 @@ body {
   transform: scale(0.85);
   transform-origin: top right;
 }
+.font-bold {
+  font-weight: 500 !important;
+}
+.font-black {
+  font-weight: 500 !important;
+}
+html, body, input, select, textarea, button {
+  font-family: var(--font-vazirmatn), sans-serif !important;
+}
+input, select, textarea, button {
+  font-family: inherit;
+}
+body {
+  font-weight: 500;
+}
+.zm-datepicker,
+.zm-calendar-container {
+  position: absolute !important;
+  top: 100% !important;
+  bottom: auto !important;
+  margin-top: 8px !important;
+  z-index: 50 !important;
+}
